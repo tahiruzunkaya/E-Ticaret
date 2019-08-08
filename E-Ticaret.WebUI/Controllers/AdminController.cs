@@ -18,7 +18,7 @@ namespace ETicaret.WebUI.Controllers
     public class AdminController : Controller
     {
         private IUnitOfWork uow;
-        // deneme
+        // deneme "s
 
         public AdminController(IUnitOfWork _uow)
         {
