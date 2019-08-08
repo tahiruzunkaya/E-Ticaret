@@ -27,6 +27,7 @@ namespace ETicaret.WebUI.Controllers
             signinManager = _signinManager;
 
 
+
         }
 
         public IActionResult AboutUs()
