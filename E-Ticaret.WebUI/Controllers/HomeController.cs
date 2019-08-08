@@ -32,7 +32,7 @@ namespace ETicaret.WebUI.Controllers
 
         public IActionResult AboutUs()
         {
-            // tahiruzunkaya
+            // tahiruzunkaya 1
             return View();
         }
         public IActionResult Categories(int id)
