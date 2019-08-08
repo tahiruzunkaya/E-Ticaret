@@ -19,6 +19,7 @@ namespace ETicaret.WebUI.Controllers
     {
         private IUnitOfWork uow;
 
+
         public AdminController(IUnitOfWork _uow)
         {
             uow = _uow;
