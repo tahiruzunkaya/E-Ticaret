@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="left-ads-display col-lg-9">
+
+    <div class="row profilerow">
+
+        <div class="col-sm-3">
+            <ul>
+
+                <li><a class="profile_update1" href="#">Profile Update</a></li>
+                <li><a class="orders1" href="#">My Order</a></li>
+
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="profile_update">
+                <form asp-controller="Home" asp-action="Profile" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">User Name</label>
+                        <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User Name" value="@ViewBag.user.UserName">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User Name" value="@ViewBag.user.Name">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Sur Name</label>
+                        <input name="surname" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User Name" value="@ViewBag.user.SurName">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="@ViewBag.user.Email">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="orders">
+                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order User</th>
+                            <th>Order Product</th>
+                            <th>Order Quantity</th>
+                            <th>Order Total Price</th>
+                            <th>Order Date</th>
+                            <th>Order Delivery Date</th>
+                            <th>Order Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Orders)
+                        {
+                            <tr>
+
+                                <td>@item.UserName</td>
+                                <td>@item.Product.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.TotalPrice</td>
+                                <td>@item.OrderDate</td>
+                                <td>@item.DeliveryDate</td>
+                                @if (item.DeliveryDate <= DateTime.Now)
+                                {
+                                    <td>Delivered</td>
+                                }
+                                else
+                                {
+                                    <td>cargo</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+
+        jQuery(document).ready(function () {
+            $(".orders").hide();
+
+            $(".slidergizle").hide();
+            $(".solgizle").hide();
+
+           
+            $(".orders1").on("click", function () {
+
+                $(".orders").show();
+                $(".profile_update").hide();
+            });
+            $(".profile_update1").on("click", function () {
+                $(".orders").hide();
+                $(".profile_update").show();
+            });
+        });
+    </script>
+}

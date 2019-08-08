@@ -1,0 +1,11 @@
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.csprojAssemblyReference.cache
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.csproj.CoreCompileInputs.cache
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.AssemblyInfoInputs.cache
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.AssemblyInfo.cs
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.dll
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\obj\Debug\netcoreapp2.1\ETicaret.WebUI.pdb
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\bin\Debug\netcoreapp2.1\ETicaret.WebUI.deps.json
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\bin\Debug\netcoreapp2.1\ETicaret.WebUI.runtimeconfig.json
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\bin\Debug\netcoreapp2.1\ETicaret.WebUI.runtimeconfig.dev.json
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\bin\Debug\netcoreapp2.1\ETicaret.WebUI.dll
+C:\Users\Tahir\source\repos\E-Ticaret\E-Ticaret.WebUI\bin\Debug\netcoreapp2.1\ETicaret.WebUI.pdb

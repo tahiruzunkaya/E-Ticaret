@@ -1,0 +1,42 @@
+﻿@model List<Slider>
+@{
+    ViewData["Title"] = "SliderList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Orders</strong>
+            </div>
+            <div class="card-body">
+                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Slider Image</th>
+                            <th>Slider Name</th>
+                            <th>Slider Link</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td><img style="width:50px; height:50px" src="~/vendor/images/@item.Image"/></td>
+                                <td>@item.SliderName</td>
+                                <td>@item.SliderLink</td>
+                                <th><a href="/Admin/SliderDelete/@item.SliderId">Sil</a></th>
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

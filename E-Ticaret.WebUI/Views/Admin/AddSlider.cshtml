@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "AddSlider";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>Slider </strong>Ekleme
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Slider Name</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="SliderName" name="text-input" placeholder="Slider Name" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Slider Description</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="SliderDescription" name="text-input" placeholder="Slider Description" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Slider Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="SliderLink" name="text-input" placeholder="Slider Link" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Slider Resmi Ekle</label></div>
+                    <div class="col-12 col-md-9"><input id="file" type="file" multiple name="file" accept="image/*"></div>
+                </div>
+                <div>
+                    <button id="success-button" type="button" class="btn btn-success addSlider">
+                        <span id="payment-button-amount">Add Slider</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts2{ 
+    <script>
+        $(".addSlider").click(function () {
+            formdata = new FormData();
+            formdata.append("file", $("#file").prop("files")[0]);
+            var slider = {
+                SliderName: $("#SliderName").val(),
+                SliderDescription: $("#SliderDescription").val(),
+                SliderLink: $("#SliderLink").val(),
+                Image: $("#file").val()
+            };
+            for (var key in slider) {
+                formdata.append(key,slider[key]);
+            }
+            $.ajax({
+
+                url: '/Admin/AddSlider',
+                dataType: 'text', // what to expect back from the server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                type: 'post',
+                success: function (message) {
+                    alert(message);
+                }
+            });
+
+            /*
+            $.post("/Admin/AddSlider", slider, function (sonuc) {
+
+                alert(sonuc);
+
+            });
+
+            
+            */
+        });
+
+
+    </script>
+}
+

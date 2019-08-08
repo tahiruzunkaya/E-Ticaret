@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+}
+
+<div class="left-ads-display col-lg-8">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <form asp-controller="Home" asp-action="ContactUs" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Name - Surname</label>
+                <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name - Surname">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Gönder</button>
+            </div>
+        </form>
+    }
+    else
+    {
+
+        <form asp-controller="Home" asp-action="ContactUs" method="post">
+
+            Mesajınız nedir <strong>
+                @User.Identity.Name
+            </strong>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Message :</label>
+                <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <input type="hidden" name="username" value="@User.Identity.Name" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Gönder</button>
+            </div>
+        </form>
+    }
+
+</div>

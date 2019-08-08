@@ -1,0 +1,59 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "AddProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>Ürün</strong>Ekleme
+        </div>
+        <div class="card-body card-block">
+            <form asp-controller="Admin" asp-action="AddProduct" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="ProductName" class=" form-control-label">Ürün Adı</label></div>
+                    <div class="col-12 col-md-9"><input asp-for="ProductName" type="text" placeholder="Product Name" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="Price" for="nuber-input" class=" form-control-label">Ürün Fiyatı</label></div>
+                    <div class="col-12 col-md-9"><input asp-for="Price" type="number" placeholder="Product Price" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="Stock" for="nuber-input" class=" form-control-label">Stock</label></div>
+                    <div class="col-12 col-md-9"><input asp-for="Stock" type="number" placeholder="Stock" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Kategori Seçiniz</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="categoryId" id="selectSm" class="form-control-sm form-control">
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <option value="@item.CategoryId">@item.CategoryName</option>
+                            }
+
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="ProductDescription" for="text-input" class=" form-control-label">Ürün Açıklaması...</label></div>
+                    <div class="col-12 col-md-9"><input asp-for="ProductDescription" type="text" placeholder="Ürün Açıklaması Giriniz.." class="form-control1"></div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Ürün Resmi Ekle</label></div>
+                    <div class="col-12 col-md-9"><input type="file" name="file" id="file" class="form-control"></div>
+                </div>
+                <div>
+                    <button id="success-button" type="submit" class="btn btn-success">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <span id="payment-button-amount">Ürünü Ekle</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

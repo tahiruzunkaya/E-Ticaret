@@ -1,0 +1,53 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "OrderList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Orders</strong>
+            </div>
+            <div class="card-body">
+                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order User</th>
+                            <th>Order Product</th>
+                            <th>Order Quantity</th>
+                            <th>Order Total Price</th>
+                            <th>Order Date</th>
+                            <th>Order Delivery Date</th>
+                            <th>Order Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.UserName</td>
+                                <td>@item.Product.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.TotalPrice</td>
+                                <td>@item.OrderDate</td>
+                                <td>@item.DeliveryDate</td>
+                                @if (item.DeliveryDate <= DateTime.Now)
+                                {
+                                    <td>Delivered</td>
+                                }
+                                else
+                                {
+                                    <td>cargo</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

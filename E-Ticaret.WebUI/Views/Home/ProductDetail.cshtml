@@ -1,0 +1,205 @@
+﻿@model Product
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-4 single-right-left ">
+    <div class="grid images_3_of_2">
+        <div class="flexslider1">
+            <ul class="slides">
+                <li data-thumb="~/vendor/images/@Model.Image">
+                    <div class="thumb-image"> <img src="~/vendor/images/@Model.Image" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-8 single-right-left simpleCart_shelfItem">
+    <h3>@Model.ProductName</h3>
+    <p>
+        @if (Model.SalePrice > 0)
+        {
+        <span class="item_price">@Model.SalePrice ₺</span>
+            <del>@Model.Price ₺</del>
+        }
+        else
+        {
+            <span class="item_price">@Model.Price ₺</span>
+        }
+
+    </p>
+    <div class="description">
+    </div>
+    <div class="color-quality">
+        <div class="color-quality-right">
+        </div>
+    </div>
+    <div class="occasional">
+    </div>
+    <div class="occasion-cart">
+        <div class="toys single-item singlepage">
+            <form action="#" method="post">
+                <input type="hidden" name="cmd" value="_cart">
+                <input type="hidden" name="add" value="1">
+
+                <input type="hidden" name="shipping" value="@Model.Image">
+
+                <input type="hidden" name="shipping2" value="@Model.Stock | @Model.ProductId">
+                <input type="hidden" name="toys_item" value="@Model.ProductName">
+                <input type="hidden" name="amount" value="
+                                               @if (Model.SalePrice > 0)
+                                               {
+                                                   @Model.SalePrice
+                                               }
+                                               else {
+                                                   @Model.Price
+                                               }
+
+                                                   ">
+                <button type="submit" class="toys-cart ptoys-cart add">
+                    Add to Cart
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clearfix"> </div>
+<!--/tabs-->
+<div class="responsive_tabs">
+    <div id="horizontalTab">
+        <div class="resp-tabs-container">
+            <!--/tab_one-->
+            <div class="tab1">
+                <div class="single_page">
+                    <h6>Product Description</h6>
+                    <p>
+                        @Model.ProductDescription
+                    </p>
+                </div>
+            </div>
+            <!--//tab_one-->
+        </div>
+    </div>
+</div>
+<div class="row">
+
+
+    <h3>Same Product</h3>
+
+</div>
+<div class="row">
+    @foreach (var item in ViewBag.sameProduct)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
+            <div class="product-toys-info">
+                <div class="men-pro-item">
+                    <div class="men-thumb-item">
+                        <img src="~/vendor/images/@item.Image" class="img-thumbnail img-fluid" alt="">
+                        <div class="men-cart-pro">
+                            <div class="inner-men-cart-pro">
+                                <a href="/Home/ProductDetail/@item.ProductId" class="link-product-add-cart">Quick View</a>
+                            </div>
+                        </div>
+                        <span class="product-new-top">New</span>
+                    </div>
+                    <div class="item-info-product">
+                        <div class="info-product-price">
+                            <div class="grid_meta">
+                                <div class="product_price">
+                                    <h4>
+                                        <a href="single.html">@item.ProductName</a>
+                                    </h4>
+                                    <div class="grid-price mt-2">
+                                        @if (item.SalePrice > 0)
+                                        {
+
+
+                                            <span class="money "><del>@item.Price ₺</del> @item.SalePrice ₺</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="money ">
+                                                @item.Price ₺
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <ul class="stars">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-star"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-star"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-star"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-star"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-star-half-o"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="toys single-item hvr-outline-out">
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="shipping" value="@item.Image">
+                                    <input type="hidden" name="shipping2" value="@item.Stock | @item.ProductId">
+                                    <input type="hidden" name="toys_item" value="@item.ProductName">
+                                    <input type="hidden" name="amount" value="
+                                               @if (item.SalePrice> 0)
+                                        {
+                                        @item.SalePrice
+                                        }
+                                        else {
+                                        @item.Price
+                                        }
+
+                                        ">
+                                    @if (item.Stock > 0)
+                                    {
+
+                                        <button type="submit" class="toys-cart ptoys-cart">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <p style="color:red">Out of Stock</p>
+                                    }
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+
+        $(".slidergizle").hide();
+        $(".solgizle").hide();
+        $("#containerduzelt").removeClass("container-fluid");
+        $("#containerduzelt").addClass("container");
+    </script>
+}

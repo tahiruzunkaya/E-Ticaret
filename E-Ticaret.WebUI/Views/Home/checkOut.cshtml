@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewData["Title"] = "checkOut";
+}
+
+<div class="shop_inner_inf">
+    <div class="privacy about">
+        <h3>Chec<span>kout</span></h3>
+        <div class="checkout-right">
+            <h4>Your shopping cart contains: <span>3 Products</span></h4>
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quality</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody class="Products">
+                    <input type="hidden" id="username" value="@User.Identity.Name" />
+
+                </tbody>
+            </table>
+        </div>
+        <div class="checkout-left">
+            <div class="col-md-4 checkout-left-basket">
+                <ul>
+                    <li>Total <i>-</i> <span class="total"></span></li>
+                </ul>
+            </div>
+            @if (User.Identity.IsAuthenticated) { 
+            <div class="col-md-8 address_form">
+                <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                    <section class="creditly-wrapper wrapper">
+                        <div class="information-wrapper">
+                            <div class="first-row form-group">
+                                <div class="card_number_grids">
+                                    <div class="card_number_grid_left">
+                                        <div class="controls">
+                                            <label class="control-label">Mobile number:</label>
+                                            <input class="form-control" type="text" placeholder="Mobile number">
+                                        </div>
+                                    </div>
+                                    <div class="card_number_grid_right">
+                                        <div class="controls">
+                                            <label class="control-label">Landmark: </label>
+                                            <input class="form-control" type="text" placeholder="Landmark">
+                                        </div>
+                                    </div>
+                                    <div class="clear"> </div>
+                                </div>
+                                <div class="controls">
+                                    <label class="control-label">Town/City: </label>
+                                    <input class="form-control" type="text" placeholder="Town/City">
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </section>
+                </form>
+                <div class="checkout-right-basket">
+                    <a class="order" href="#">ORDER </a>
+                </div>
+            </div>
+            }
+            else {
+
+                <h4>Sipariş için giriş yapınız.</h4>
+
+            }
+            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+
+        $(".slidergizle").hide();
+        $(".solgizle").hide();
+        $("#containerduzelt").removeClass("container-fluid");
+        $("#containerduzelt").addClass("container");
+        $(".containerduzelt").removeClass("row");
+
+        jQuery(document).ready(function () {
+            $(".top_toys_cart").hide();
+            var total=0;
+            $("li.sbmincart-item").each(function (index) {
+                var ProductName = $(this).find("input[name='toys_item_" + (index + 1) + "']").val();
+                var Image = $(this).find("input[name='shipping_" + (index + 1) + "']").val();
+                var amout = $(this).find("input[name='amount_" + (index + 1) + "']").val();
+                var ayir = $(this).find("input[name='shipping2_" + (index + 1) + "']").val();
+                var ayrilmis = ayir.split(" | ");
+                var Stock = ayrilmis[0];
+                var ProductId = ayrilmis[1];
+                var Price;
+                if (parseInt($(this).find(".sbmincart-quantity").val()) > Stock) {
+
+                    var pPrice = parseFloat(Stock) * parseFloat(amout);
+                    total += pPrice;
+                    Price = pPrice.toFixed(2) + "₺";
+                } else {
+
+
+                    Price = $(this).find(".sbmincart-price").html().split("$");
+                    total += parseFloat(Price[1]);
+                    Price = Price[1] + "₺";
+                }
+
+                
+                var Quantity = (parseInt($(this).find(".sbmincart-quantity").val()) > Stock) ? Stock : parseInt($(this).find(".sbmincart-quantity").val());
+
+                $(".Products").append('<tr class="rem1">' +
+                    ' <td class= "invert-image" > <a href="single.html"><img style="width:40px; height:40px;" src="/vendor/images/' + Image + '" alt=" " class="img-responsive"></a></td>' +
+                    ' <td class="invert">' +
+                    ' <div class="quantity">' +
+                    '  <div class="quantity-select">' +
+                    '  <div class="entry value"><span>' + Quantity + '</span></div>' +
+                    '<input type="hidden" class="stock" value="' + Stock + '"' +
+                    ' </div>' +
+                    ' </div>' +
+                    '</td>' +
+                    ' <td class="invert pname">' + ProductName + '</td>' +
+                    ' <td class="invert price">' + Price + '</td>' + 
+
+                    '<input type="hidden" class="pid" value="' + ProductId + '"' +
+                    ' </tr >');
+            });
+            $(".total").html(total.toFixed(2) + "₺");
+            /*
+            $('.value-plus').on('click', function () {
+                var divUpd = $(this).parent().find('.value'),
+                    newVal = parseInt(divUpd.text(), 10) + 1,
+                    stock = parseInt($(this).parent().find('.stock').val());
+                if (newVal <=stock) divUpd.text(newVal);
+            });
+
+            $('.value-minus').on('click', function () {
+                var divUpd = $(this).parent().find('.value'),
+                    newVal = parseInt(divUpd.text(), 10) - 1;
+                if (newVal >= 1) divUpd.text(newVal);
+            });
+            */
+
+            $(".order").click(function () {
+                $(".rem1").each(function () {
+
+                    var pid = $(this).find(".pid").val();
+                    var price = $(this).find(".price").html();
+                    price = price.split("₺")[0];
+                    var Quantity = $(this).find(".value span").html();
+                    var username = $("#username").val();
+
+                    var order = {
+                        UserName: username,
+                        ProductId: parseInt(pid),
+                        Quantity: parseInt(Quantity),
+                        TotalPrice: parseFloat(price)
+                    }
+
+
+                    $.post("/Home/checkOut", order, function (sonuc) {
+
+                        if (sonuc == "tamam") {
+
+                            alert("Siparişiniz alınmıştır.");
+                            $(".Products").html(" ");
+                            $(".total").html(" ");
+                            localStorage.removeItem("staplesbmincart");
+
+                            // $(".sbmincart-remove").trigger("click");
+                        }
+
+                    });
+                    
+
+                });
+            });
+        });
+       
+    </script>
+}
+
+
